@@ -1,7 +1,7 @@
 from crawler import JsonCrawler
 
+
 class WeatherForecast:
-    # TODO: implement
     def __init__(self, locations, conditions):
         self.locations = locations
         self.conditions = conditions
@@ -32,10 +32,6 @@ if __name__ == '__main__':
     forecast = WeatherForecast(['seoul', 'new york'], [
         ('Light cloud', lambda x: JsonCrawler.get_by_name(x).get_data()['consolidated_weather'][0]['weather_state_name'] == 'Light Cloud'),
         ('Ice age', lambda x: JsonCrawler.get_by_name(x).get_data()['consolidated_weather'][0]['min_temp'] < -30)
-        # ('Light cloud', 'light cloud condition'), ('Ice age', 'ice age condition)
-        # TODO: set two conditions:
-        # 1. 'Light cloud' : True if weather state contains light cloud
-        # 2. 'Ice age' : True if minimum temperature is lower than -30 (degrees celsius)
 
     ])
     forecast.run()
