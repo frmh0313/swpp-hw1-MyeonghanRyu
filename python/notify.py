@@ -35,3 +35,6 @@ if __name__ == '__main__':
 
     ])
     forecast.run()
+
+# lambda condition -> how to make it simpler?
+# taking a location name and calling Classmethod?
