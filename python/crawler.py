@@ -5,14 +5,13 @@ import time
 from queue import Queue
 
 
-# TODO: implement `handle_exception` decorator
 def handle_exception(fn):
     def apply(*args):
         try:
             return fn(*args)
         except Exception as e:
-            # print('Caught Exception')
-            print(e)
+            print('Caught Exception:', "\'{}\'".format(args[1]))
+            # print(e)
     return apply
 
 
@@ -27,7 +26,6 @@ class JsonCrawler(threading.Thread):
         self.setDaemon(True)
         self.queue = Queue()
 
-        # TODO: initialize instance variables
         self.name = name
         self.url = url
         self.period = period
@@ -54,7 +52,6 @@ class JsonCrawler(threading.Thread):
     def __str__(self):
         return self.name
 
-    # TODO: implement `get_by_name` as class method
     @classmethod
     @handle_exception
     def get_by_name(cls, name):
