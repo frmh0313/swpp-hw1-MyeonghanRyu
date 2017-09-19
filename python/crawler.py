@@ -9,9 +9,11 @@ from queue import Queue
 def handle_exception(fn):
     def apply(*args):
         try:
-            fn(*args)
+            return fn(*args)
         except Exception as e:
+            # print('Caught Exception')
             print(e)
+    return apply
 
 
 class JsonCrawler(threading.Thread):
@@ -26,9 +28,11 @@ class JsonCrawler(threading.Thread):
         self.queue = Queue()
 
         # TODO: initialize instance variables
+        self.name = name
         self.url = url
         self.period = period
         self.active = active
+        self.crawlers[name] = self
 
         self.start()
 
@@ -51,6 +55,10 @@ class JsonCrawler(threading.Thread):
         return self.name
 
     # TODO: implement `get_by_name` as class method
+    @classmethod
+    @handle_exception
+    def get_by_name(cls, name):
+        return cls.crawlers[name]
 
     @handle_exception
     def crawl(self):
@@ -62,4 +70,3 @@ class JsonCrawler(threading.Thread):
 
     def get_data(self):
         return self.queue.get()
-
