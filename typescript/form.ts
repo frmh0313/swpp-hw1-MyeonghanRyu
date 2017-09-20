@@ -128,6 +128,23 @@ class Form {
 	    return this.birth_year >= 1800 && this.birth_year <= 2017
     }
 
+    check_all() {
+	    var result = {}
+	    result['email'] = this.check_email()
+        result['password'] = this.check_password()
+        result['password_confirmation'] = this.check_password_confirmation()
+        result['website'] = this.check_website()
+        result['phone_number'] = this.check_phone_number()
+        result['first_name'] = this.check_first_name()
+        result['last_name'] = this.check_last_name()
+        result['age'] = this.check_age()
+        result['birth_month'] = this.check_birth_month()
+        result['birth_day'] = this.check_birth_day()
+        result['birth_year'] = this.check_birth_year()
+
+        return result
+    }
+
 }
 
 var but = document.createElement('button')
