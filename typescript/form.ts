@@ -74,7 +74,7 @@ class Form {
     }
 
     check_phone_number() {
-	    var reg = /\d{3}\-\d{4}\-\d{r}/
+	    var reg = /\d{3}-\d{4}-\d{4}/
         if (reg.test(this.phone_number)) {
 	        return 'correct'
         } else {
@@ -113,7 +113,8 @@ class Form {
         "May", "June", "July", "August",
         "September", "October", "November", "December"]
 
-	    return this.birth_month in months
+	    //return this.birth_month in months
+        return months.includes(this.birth_month)
     }
 
     // 그냥 1-31로 처리해도 괜찮은지?
