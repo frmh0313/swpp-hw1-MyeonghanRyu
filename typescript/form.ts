@@ -25,31 +25,29 @@ class Form {
 	}
 	// TODO: You may fill in functions in the class.
 
-	check_email() {
-		var reg = /^\S+@\S+\.\S{2,3}/
-		if (reg.test(this.email)) {
-			return 'correct'
-		} else {
-			return 'incorrect'
-		}
-	}
+    reg = {'email': /^\S+@\S+\.\S{2,3]/,
+        'website': /https?:\/\/\w+/,
+        'phone_number':/\d{3}-\d{4}-\d{4}/,
+    'name':/[A-Z][a-z]+/}
+
+    check_pattern(pattern: RegExp, str: string) {
+	    if (pattern.test(str)) {
+	        return 'correct'
+        } else {
+	        return 'incorrect'
+        }
+    }
 
 	check_password() {
-	    /*
-	    longer than 8 characters
-	    contains at least a number
-	    contains at least a lower case
-	    contains at least an upper case
-	     */
 	    var longer_than_8_chars = this.password.length >= 8
-        var has_one_lower_case = /[a-z]/.test(this.password)
-        var has_one_upper_case = /[A-Z]/.test(this.password)
-        var has_one_number = /[0-9]/.test(this.password)
+        var has_at_least_one_lower_case = /[a-z]/.test(this.password)
+        var has_at_least_one_upper_case = /[A-Z]/.test(this.password)
+        var has_at_least_one_number = /[0-9]/.test(this.password)
 
         if (longer_than_8_chars &&
-        has_one_lower_case &&
-        has_one_upper_case &&
-        has_one_number) {
+        has_at_least_one_lower_case &&
+        has_at_least_one_upper_case &&
+        has_at_least_one_number) {
 	        return 'correct'
         } else {
 	        return 'incorrect'
@@ -63,47 +61,6 @@ class Form {
 	        return 'incorrect'
         }
     }
-
-    check_website() {
-	    var reg = /https?:\/\/\w+/
-        if (reg.test(this.website)) {
-	        return 'correct'
-        } else {
-	        return 'incorrect'
-        }
-    }
-
-    check_phone_number() {
-	    var reg = /\d{3}-\d{4}-\d{4}/
-        if (reg.test(this.phone_number)) {
-	        return 'correct'
-        } else {
-	        return 'incorrect'
-        }
-    }
-
-    // 괜찮을 경우 reg dictionary에 {'field':'regex'}로 regex 저장.
-    // email, website, phone_number, first_name, last_name는 하나의 함수로 처리 가능
-
-
-    check_first_name() {
-	    var reg = /[A-Z][a-z]+/
-        if (reg.test(this.fname)) {
-	        return 'correct'
-        } else {
-	        return 'incorrect'
-        }
-    }
-
-    check_last_name() {
-	    var reg = /[A-Z][a-z]+/
-        if (reg.test(this.lname)) {
-	        return 'correct'
-        } else {
-	        return 'incorrect'
-        }
-    }
-
     check_age() {
 	    return this.age >= 0 && this.age <= 200
     }
@@ -128,13 +85,13 @@ class Form {
 
     check_all() {
 	    var result = {}
-	    result['email'] = this.check_email()
+	    result['email'] = this.check_pattern(this.reg['email'], this.email)
         result['password'] = this.check_password()
         result['password_confirmation'] = this.check_password_confirmation()
-        result['website'] = this.check_website()
-        result['phone_number'] = this.check_phone_number()
-        result['first_name'] = this.check_first_name()
-        result['last_name'] = this.check_last_name()
+        result['website'] = this.check_pattern(this.reg['website'], this.website)
+        result['phone_number'] = this.check_pattern(this.reg['phone_number'], this.phone_number)
+        result['first_name'] = this.check_pattern(this.reg['name'], this.fname)
+        result['last_name'] = this.check_pattern(this.reg['name'], this.lname)
         result['age'] = this.check_age()
         result['birth_month'] = this.check_birth_month()
         result['birth_day'] = this.check_birth_day()
