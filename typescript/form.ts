@@ -65,7 +65,7 @@ class Form {
     }
 
     check_website() {
-	    var reg = /http:\/\/\w+/
+	    var reg = /https?:\/\/\w+/
         if (reg.test(this.website)) {
 	        return 'correct'
         } else {
@@ -82,8 +82,6 @@ class Form {
         }
     }
 
-    //TODO
-    // field에 dictionary추가해도 괜찮은지?
     // 괜찮을 경우 reg dictionary에 {'field':'regex'}로 regex 저장.
     // email, website, phone_number, first_name, last_name는 하나의 함수로 처리 가능
 
@@ -118,7 +116,6 @@ class Form {
 	    return this.birth_month in months
     }
 
-    // TODO
     // 그냥 1-31로 처리해도 괜찮은지?
     check_birth_day() {
 	    return this.birth_day >= 1 && this.birth_day <= 31
@@ -163,29 +160,22 @@ but.onclick = function() {
 	var birth_day : number = document.forms["form"]["birth_day"].value
 	var birth_year : number = document.forms["form"]["birth_year"].value
 
-    // regex
-	/*
-	email: /\S+\@[^ \s\@]+\.[a-z]{2,3}
-	password:
-	password_confirmation
-	website:/http\:\/\/\w+
-	phone_number : /\d{3}\-\d{4}\-\d{4}
-	first name: /[A-Z][a-z]+/
-	last name: /[A-Z][a-z]+/
-	age: 0 to 200 -- comparison
-	birth_month: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-	birth_day: 1 to 31 -- comparison
-	birth_year: 1800 to 2017 -- comparison
-	 */
-	/*
-	check_ 함수 -> 'correct' 또는 'incorrect' 출력.
-	출력값은 dictionary에 저장.
-	 */
-
-
     var form : Form = new Form(email, password, password_confirmation,
 		website, phone_number, fname, lname, age, birth_month, birth_day, birth_year)
 
+    var fields = ['email', 'password', 'password_confirmation', 'website', 'phone_number',
+    'first_name', 'last_name', 'age', 'birth_month', 'birth_day', 'birth_year']
+
+    var check_result = form.check_all()
+
+    var popup_message = ""
+
+	for (var i = 0;i < fields.length;i++) {
+        var msg : string = fields[i] + ": " + check_result[fields[i]] + "\n"
+        popup_message += msg
+    }
+
+    alert(popup_message)
 
     // Hint: you can use the RegExp class for matching a string with the `test` method.
     // Hint: use the `alert` function for modals.
