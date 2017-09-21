@@ -31,11 +31,7 @@ class Form {
     'name':/[A-Z][a-z]+/}
 
     check_pattern(pattern: RegExp, str: string) {
-	    if (pattern.test(str)) {
-	        return 'correct'
-        } else {
-	        return 'incorrect'
-        }
+	    return pattern.test(str)
     }
 
 	check_password() {
@@ -44,22 +40,12 @@ class Form {
         var has_at_least_one_upper_case = /[A-Z]/.test(this.password)
         var has_at_least_one_number = /[0-9]/.test(this.password)
 
-        if (longer_than_8_chars &&
-        has_at_least_one_lower_case &&
-        has_at_least_one_upper_case &&
-        has_at_least_one_number) {
-	        return 'correct'
-        } else {
-	        return 'incorrect'
-        }
+        return longer_than_8_chars && has_at_least_one_lower_case &&
+        has_at_least_one_upper_case && has_at_least_one_number
     }
 
     check_password_confirmation() {
-	    if (this.password == this.password_confirmation) {
-	        return 'correct'
-        } else {
-	        return 'incorrect'
-        }
+	    return this.password == this.password_confirmation
     }
     check_age() {
 	    return this.age >= 0 && this.age <= 200
