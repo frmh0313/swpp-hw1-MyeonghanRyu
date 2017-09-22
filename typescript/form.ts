@@ -23,7 +23,6 @@ class Form {
         this.birth_day = birth_day
         this.birth_year = birth_year
     }
-    // TODO: You may fill in functions in the class.
 
     reg = {'email': /^\S+@\S+\.\S{2,3}/,
         'website': /https?:\/\/\w+/,
@@ -106,19 +105,10 @@ but.onclick = function() {
 
     var form : Form = new Form(email, password, password_confirmation,
         website, phone_number, fname, lname, age, birth_month, birth_day, birth_year)
-
     var fields = ['email', 'password', 'password_confirmation', 'website', 'phone_number',
         'first_name', 'last_name', 'age', 'birth_month', 'birth_day', 'birth_year']
 
     var check_result = form.check_all()
-
-
-    /*
-    for (let key in fields) {
-        is_all_true_in_check_result = is_all_true_in_check_result && check_result[key]
-    }
-    */
-
     var wrong_fields = []
 
     for (let key of fields) {
@@ -140,11 +130,6 @@ but.onclick = function() {
     }
 
     alert(popup_message)
-
-    // Hint: you can use the RegExp class for matching a string with the `test` method.
-    // Hint: use the `alert` function for modals.
-    // Hint: you can set contents of elements by finding it with `document.getElementById`, and fixing the `innerHTML`.
-    // Hint: Ask Google to do things you don't know yet! There should be others who have already done what you are to encounter.
 
     for (let key of fields) {
         if (check_result[key] == true) {
