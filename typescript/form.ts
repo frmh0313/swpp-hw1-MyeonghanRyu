@@ -47,7 +47,9 @@ class Form {
         return this.password == this.password_confirmation
     }
     check_age() {
-        return this.age >= 0 && this.age <= 200
+        var age_string : string = document.forms["form"]["age"].value // 다듬어보기.
+        if (/^$/.test(age_string)) return false
+        else return this.age >= 0 && this.age <= 200
     }
 
     check_birth_month() {
